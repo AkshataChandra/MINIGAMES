@@ -1,0 +1,43 @@
+import matplotlib.pyplot as plt
+
+def calculate_bmi(weight, height):
+    return weight / (height ** 2)
+
+def weight_category(bmi):
+    if bmi < 18.5:
+        return "Underweight"
+    elif 18.5 <= bmi <= 24.9:
+        return "Healthy weight"
+    elif 25 <= bmi <= 29.9:
+        return "Overweight"
+    else:
+        return "Obese"
+
+def plot_bmi_results(bmi, category):
+    categories = ["Underweight", "Healthy weight", "Overweight", "Obese"]
+    bmi_values = [18.5, 24.9, 29.9, 35]  # Approximate BMI thresholds
+    
+    plt.bar(categories, bmi_values, color=['blue', 'green', 'orange', 'red'], alpha=0.6)
+    plt.axhline(y=bmi, color='purple', linestyle='--', label=f'Your BMI: {bmi:.2f}')
+    plt.xlabel('Weight Category')
+    plt.ylabel('BMI Value')
+    plt.title(f'BMI Analysis - {category}')
+    plt.legend()
+    plt.show()
+
+# Input
+try:
+    height = float(input("Enter your height in meters (e.g., 1.75): "))
+    weight = float(input("Enter your weight in kilograms (e.g., 70): "))
+    age = int(input("Enter your age: "))
+    gender = input("Enter your gender (M/F): ")
+
+    bmi = calculate_bmi(weight, height)
+    category = weight_category(bmi)
+
+    print(f"Your BMI is {bmi:.2f}.")
+    print(f"Weight Category: {category}")
+    plot_bmi_results(bmi, category)
+
+except ValueError:
+    print("Please enter valid inputs!")
